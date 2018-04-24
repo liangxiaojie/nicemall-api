@@ -7,7 +7,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1524393373203_2073';
 
   config.mongoose = {
-    url: 'mongodb://127.0.0.1/nicemall',
+    url: process.env.DB_URL || 'mongodb://127.0.0.1/nicemall',
     options: {},
   };
 
