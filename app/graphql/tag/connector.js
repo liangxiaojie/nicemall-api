@@ -28,7 +28,7 @@ class TagConnector {
   }
 
   async fetchRecommandation() {
-    const tags = await this.proxy.findAll({
+    const tags = await this.proxy.find({
       attributes: [ 'content' ],
       group: [ 'content' ],
       limit: 10,
