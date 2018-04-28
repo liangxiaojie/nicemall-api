@@ -8,9 +8,9 @@ module.exports = app => {
     imgSrc: String,
     title: String,
     discription: String,
-    price: String,
-    priceOld: String,
-    sales: String,
+    price: Number,
+    priceOld: Number,
+    sales: Number,
   });
 
   return mongoose.model('Goods', GoodsSchema);
