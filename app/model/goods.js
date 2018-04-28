@@ -11,6 +11,8 @@ module.exports = app => {
     price: Number,
     priceOld: Number,
     sales: Number,
+    created: Date,
+    updated: Date,
   });
 
   return mongoose.model('Goods', GoodsSchema);

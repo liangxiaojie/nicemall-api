@@ -6,5 +6,7 @@ type Goods {
   discription: String,
   price: Int!,
   priceOld: Int,
-  sales: Int!
+  sales: Int!,
+  created: Date,
+  updated: Date
 }

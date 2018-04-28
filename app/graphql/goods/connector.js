@@ -17,12 +17,18 @@ class GoodsConnector {
   }
 
   async create(imgSrc, title, discription, price, priceOld, sales) {
-    const goods = await this.proxy.create({ imgSrc, title, discription, price, priceOld, sales });
+    const goods = await this.proxy.create({
+      imgSrc, title, discription, price, priceOld, sales,
+      created: Date.now(), updated: Date.now(),
+    });
     return goods.toJSON();
   }
 
   async update(_id, imgSrc, title, discription, price, priceOld, sales) {
-    await this.proxy.update({ _id }, { $set: { imgSrc, title, discription, price, priceOld, sales } });
+    await this.proxy.update({ _id }, { $set: {
+      imgSrc, title, discription, price, priceOld, sales,
+      updated: Date.now(),
+    } });
     return await this.fetchById(_id);
   }
 
