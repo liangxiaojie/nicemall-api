@@ -1,0 +1,10 @@
+# 商品
+type Goods {
+  _id: ID!,
+  imgSrc: String!,
+  title: String!,
+  discription: String,
+  price: Int!,
+  priceOld: Int,
+  sales: Int!
+}
