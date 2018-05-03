@@ -17,9 +17,10 @@ class GoodsConnector {
   }
 
   async create(imgSrc, title, discription, price, priceOld, sales) {
+    const now = Date.now();
     const goods = await this.proxy.create({
       imgSrc, title, discription, price, priceOld, sales,
-      created: Date.now(), updated: Date.now(),
+      created: now, updated: now,
     });
     return goods.toJSON();
   }
