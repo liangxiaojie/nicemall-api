@@ -1,8 +1,28 @@
-
-
+# 用户信息
 type User {
-  id: ID!
-  name: String!
-  items: [Item!]
+  # ID
+  _id: ID!
+  # 昵称
+  nickname: String
+  # 头像
+  avatar: String
+  # 真实姓名
+  realname: String
+  # 用户名
+  username: String
+  # 性别 0:男 1:女 2:未知
+  sex: Int
+  # 国家
+  country: String
+  # 城市
+  city: String
+  # 芝麻信用分
+  credit_score: Int
+  # 最后登录时间
+  last_login_at: Date
+  # 注册时间
+  created_at: Date
+  # 更新时间
+  updated_at: Date
 }
 

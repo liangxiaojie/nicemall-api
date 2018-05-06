@@ -2,11 +2,8 @@
 
 module.exports = {
   Query: {
-    user(root, { id }, ctx) {
-      return ctx.connector.user.fetchById(id);
-    },
-    tags(root, params, ctx) {
-      return ctx.connector.tag.fetchRecommandation();
+    user(root, { _id }, ctx) {
+      return ctx.connector.user.fetchById(_id);
     },
   },
 };

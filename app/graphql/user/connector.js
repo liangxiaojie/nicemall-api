@@ -9,11 +9,9 @@ class UserConnector {
   }
 
   fetch(ids) {
-    const users = this.ctx.app.model.User.findAll({
-      where: {
-        id: {
-          $in: ids,
-        },
+    const users = this.ctx.app.model.User.find({
+      _id: {
+        $in: ids,
       },
     }).then(us => us.map(u => u.toJSON()));
     return users;

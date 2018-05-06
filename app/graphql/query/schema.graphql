@@ -1,7 +1,6 @@
 # 查询操作
 type Query {
-  user(id: ID!): User
-  tags: [String!]
+  user(_id: ID!): User
 
   goodses: [Goods],
   goods(_id: ID!): Goods

@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = {
-  User: {
-    items(root, _, ctx) {
-      return ctx.connector.item.fetchByUserId(root.id);
-    },
-  },
+  // User: {
+  //   items(root, _, ctx) {
+  //     return ctx.connector.item.fetchByUserId(root.id);
+  //   },
+  // },
   Mutation: {
     createItem(root, {
       userID,
