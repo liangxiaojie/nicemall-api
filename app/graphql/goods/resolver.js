@@ -2,38 +2,21 @@
 
 module.exports = {
   Query: {
-    goodses(root, params, ctx) {
-      return ctx.connector.goods.fetch(params);
+    goodses(root, { query, skip, first }, ctx) {
+      return ctx.connector.goods.fetch(query, first, skip);
     },
     goods(root, { _id }, ctx) {
       return ctx.connector.goods.fetchById(_id);
     },
   },
   Mutation: {
-    createGoods(root, {
-      imgSrc,
-      title,
-      discription,
-      price,
-      priceOld,
-      sales,
-    }, ctx) {
-      return ctx.connector.goods.create(imgSrc, title, discription, price, priceOld, sales);
+    createGoods(root, { input }, ctx) {
+      return ctx.connector.goods.create(input);
     },
-    updateGoods(root, {
-      _id,
-      imgSrc,
-      title,
-      discription,
-      price,
-      priceOld,
-      sales,
-    }, ctx) {
-      return ctx.connector.goods.update(_id, imgSrc, title, discription, price, priceOld, sales);
+    updateGoods(root, { _id, input }, ctx) {
+      return ctx.connector.goods.update(_id, input);
     },
-    deleteGoods(root, {
-      _id,
-    }, ctx) {
+    deleteGoods(root, { _id }, ctx) {
       return ctx.connector.goods.delete(_id);
     },
   },

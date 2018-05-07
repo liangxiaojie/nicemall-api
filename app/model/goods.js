@@ -5,14 +5,23 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const GoodsSchema = new Schema({
-    imgSrc: String,
-    title: String,
+    name: String,
     discription: String,
+    type: Number,
+    images: Array,
     price: Number,
     priceOld: Number,
+    store_nums: Number,
     sales: Number,
-    created: Date,
-    updated: Date,
+    mark: Number,
+    status: Number,
+    up_time: Date,
+    down_time: Date,
+    attrs: Array,
+    spec_id: Schema.Types.ObjectId,
+    logistics_id: Schema.Types.ObjectId,
+    created_time: Date,
+    updated_time: Date,
   });
 
   return mongoose.model('Goods', GoodsSchema);

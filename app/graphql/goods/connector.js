@@ -6,8 +6,8 @@ class GoodsConnector {
     this.proxy = this.ctx.app.model.Goods;
   }
 
-  async fetch() {
-    const goodses = await this.ctx.app.model.Goods.find();
+  async fetch(query, first, skip) {
+    const goodses = await this.proxy.find(query).limit(first).skip(skip);
     return goodses.map(g => g.toJSON());
   }
 
@@ -16,19 +16,19 @@ class GoodsConnector {
     return goods && goods.toJSON();
   }
 
-  async create(imgSrc, title, discription, price, priceOld, sales) {
+  async create({ name, title, discription, price, priceOld, sales }) {
     const now = Date.now();
     const goods = await this.proxy.create({
-      imgSrc, title, discription, price, priceOld, sales,
-      created: now, updated: now,
+      name, title, discription, price, priceOld, sales,
+      created_time: now, updated_time: now,
     });
     return goods.toJSON();
   }
 
-  async update(_id, imgSrc, title, discription, price, priceOld, sales) {
+  async update(_id, { name, title, discription, price, priceOld, sales }) {
     await this.proxy.update({ _id }, { $set: {
-      imgSrc, title, discription, price, priceOld, sales,
-      updated: Date.now(),
+      name, title, discription, price, priceOld, sales,
+      updated_time: Date.now(),
     } });
     return await this.fetchById(_id);
   }

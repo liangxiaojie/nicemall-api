@@ -1,12 +1,52 @@
 # 商品
 type Goods {
-  _id: ID!,
-  imgSrc: String!,
-  title: String!,
-  discription: String,
-  price: Int!,
-  priceOld: Int,
-  sales: Int!,
-  created: Date,
-  updated: Date
+  # 商品ID
+  _id: ID!
+  # 商品名称
+  name: String!
+  # 商品描述
+  discription: String
+  # 商品类型 0:普通商品 1:租赁商品 2:0元购商品
+  type: Int!
+  # 商品图片列表
+  images: [String],
+  # 商品价格
+  price: Int!
+  # 原价
+  priceOld: Int
+  # 库存
+  store_nums: Int!
+  # 销量
+  sales: Int!
+  # 评分
+  mark: Float!
+  # 状态 0:上架 1:下架 2:已删除
+  status: Int!
+  # 上架时间
+  up_time: Date
+  # 下架时间
+  down_time: Date
+  # 商品属性
+  attrs: [String]
+  # 创建时间
+  created_time: Date
+  # 修改时间
+  updated_time: Date
+}
+
+input GoodsInput {
+  # 商品名称
+  name: String!
+  # 商品描述
+  discription: String
+  # 商品价格
+  price: Int!
+  # 原价
+  priceOld: Int
+  # 库存
+  store_nums: Int!
+  # 销量
+  sales: Int!
+  # 评分
+  mark: Float!
 }
