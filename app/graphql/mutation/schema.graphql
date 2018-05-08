@@ -1,13 +1,23 @@
 # 增删改操作
 type Mutation {
-  createGoods (imgSrc: String!, title: String!, discription: String, price: Int!, priceOld: Int, sales: Int!): Goods
-  updateGoods (_id: ID!, imgSrc: String!, title: String!, discription: String, price: Int!, priceOld: Int, sales: Int!): Goods
-  deleteGoods (_id: ID!): Goods
+  # 添加商品
+  createGoods(input: GoodsInput!): Goods
+  # 更新商品信息
+  updateGoods(_id: ID!, input: GoodsInput!): Goods
+  # 删除商品
+  deleteGoods(_id: ID!): Goods
 
-  createItem (userID: ID!, content: String!, expire: Date): Item
-  updateItem (id: ID!, content: String, expire: Date, done: Boolean): Item
-  deleteItem (id: ID!): Item 
+  # 购物车添加商品
+  addCartGoods(input: CartGoodsInput!): CartGoods
+  # 更新购物车商品规格信息
+  updateCartGoods(_id: ID!, input: CartGoodsInput!): CartGoods
+  # 删除购物车商品
+  deleteCartGoods(_id: ID!): CartGoods
 
-  attachTag (itemID: ID!, tag: String!): Tag 
-  removeTag (id: ID!): Tag 
+  # 创建订单
+  createOrder(input: OrderInput!): Order
+  # 更新订单
+  updateOrder(_id: ID!, input: OrderInput!): Order
+  # 删除订单
+  deleteOrder(_id: ID!): Order
 }

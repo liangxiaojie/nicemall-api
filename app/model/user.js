@@ -5,6 +5,7 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
+    wechat_number: String,
     nickname: String,
     avatar: String,
     realname: String,
@@ -14,7 +15,6 @@ module.exports = app => {
     country: String,
     city: String,
     credit_score: Number,
-    email: String,
     last_login_at: Date,
     created_at: Date,
     updated_at: Date,
