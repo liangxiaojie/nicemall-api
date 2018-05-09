@@ -3,7 +3,12 @@
 class GoodsConnector {
   constructor(ctx) {
     this.ctx = ctx;
-    this.proxy = this.ctx.app.model.CartGoods;
+    this.proxy = this.ctx.app.model.DeliveryAddress;
+  }
+
+  async fetch(query, first, skip) {
+    const orders = await this.proxy.find(query).limit(first).skip(skip);
+    return orders.map(g => g.toJSON());
   }
 
   async create({ cart_id, goods_id, goods_type, number, spec }) {

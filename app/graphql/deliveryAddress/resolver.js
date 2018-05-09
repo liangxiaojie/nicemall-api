@@ -2,17 +2,19 @@
 
 module.exports = {
   Query: {
-
+    deliveryAddresses(root, { query, skip, first }, ctx) {
+      return ctx.connector.deliveryAddress.fetch(query, first, skip);
+    },
   },
   Mutation: {
-    addCartGoods(root, { input }, ctx) {
-      return ctx.connector.cartGoods.create(input);
+    addDeliveryAddress(root, { input }, ctx) {
+      return ctx.connector.deliveryAddress.create(input);
     },
-    updateCartGoods(root, { _id, input }, ctx) {
-      return ctx.connector.cartGoods.update(_id, input);
+    updateDeliveryAddress(root, { _id, input }, ctx) {
+      return ctx.connector.deliveryAddress.update(_id, input);
     },
-    deleteCartGoods(root, { _id }, ctx) {
-      return ctx.connector.cartGoods.delete(_id);
+    deleteDeliveryAddress(root, { _id }, ctx) {
+      return ctx.connector.deliveryAddress.delete(_id);
     },
   },
 };

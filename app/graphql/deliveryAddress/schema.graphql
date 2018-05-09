@@ -1,18 +1,18 @@
-# 购物车商品信息
-type CartGoods {
+# 收货地址
+type DeliveryAddress {
   user_id: ID!
-  goods: Goods!
-  goods_type: Int!
-  number: Int!
-  spec: [String]
+  consignee: String,
+  phone_number: String,
+  address: String,
+  is_default: Boolean,
   created_time: Date
   updated_time: Date
 }
 
-input CartGoodsInput {
+input DeliveryAddressInput {
   user_id: ID!
-  goods_id: ID!
-  goods_type: Int!
-  number: Int!
-  spec: [String]
+  consignee: String,
+  phone_number: String,
+  address: String,
+  is_default: Boolean,
 }
