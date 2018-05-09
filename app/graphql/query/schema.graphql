@@ -18,4 +18,7 @@ type Query {
 
   # 收货地址列表
   deliveryAddresses(user_id: ID!): [DeliveryAddress!]!
+
+  # 首页轮播图列表
+  gallerys: [Gallery!]!
 }

@@ -1,0 +1,17 @@
+# 轮播图
+type Gallery {
+  _id: ID!
+  imgSrc: String
+  linkUrl: String
+  order: Number
+  created_time: Date
+  updated_time: Date
+}
+
+input GalleryInput {
+  imgSrc: String
+  linkUrl: String
+  order: Number
+  created_time: Date
+  updated_time: Date
+}
