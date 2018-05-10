@@ -3,7 +3,7 @@ type Gallery {
   _id: ID!
   imgSrc: String
   linkUrl: String
-  order: Number
+  order: Int
   created_time: Date
   updated_time: Date
 }
@@ -11,7 +11,5 @@ type Gallery {
 input GalleryInput {
   imgSrc: String
   linkUrl: String
-  order: Number
-  created_time: Date
-  updated_time: Date
+  order: Int
 }

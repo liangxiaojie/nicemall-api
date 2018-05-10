@@ -7,13 +7,13 @@ module.exports = {
     },
   },
   Mutation: {
-    createOrder(root, { input }, ctx) {
+    createGallery(root, { input }, ctx) {
       return ctx.connector.gallery.create(input);
     },
-    updateOrder(root, { _id, input }, ctx) {
+    updateGallery(root, { _id, input }, ctx) {
       return ctx.connector.gallery.update(_id, input);
     },
-    deleteOrder(root, { _id }, ctx) {
+    deleteGallery(root, { _id }, ctx) {
       return ctx.connector.gallery.delete(_id);
     },
   },

@@ -7,7 +7,7 @@ module.exports = app => {
   const GallerySchema = new Schema({
     imgSrc: String,
     linkUrl: String,
-    order: Number,
+    order: { type: Number, default: 0 },
     created_time: Date,
     updated_time: Date,
   });

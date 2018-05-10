@@ -1,6 +1,6 @@
 'use strict';
 
-class OrderConnector {
+class GalleryConnector {
   constructor(ctx) {
     this.ctx = ctx;
     this.proxy = this.ctx.app.model.Gallery;
@@ -11,28 +11,33 @@ class OrderConnector {
     return gallerys.map(g => g.toJSON());
   }
 
-  async create({ name, title, discription, price, priceOld, sales }) {
-    const now = Date.now();
-    const order = await this.proxy.create({
-      name, title, discription, price, priceOld, sales,
-      created_time: now, updated_time: now,
-    });
-    return order.toJSON();
+  async fetchById(_id) {
+    const gallery = await this.proxy.findById(_id);
+    return gallery && gallery.toJSON();
   }
 
-  async update(_id, { name, title, discription, price, priceOld, sales }) {
+  async create({ imgSrc, linkUrl, order }) {
+    const now = Date.now();
+    const gallery = await this.proxy.create({
+      imgSrc, linkUrl, order,
+      created_time: now, updated_time: now,
+    });
+    return gallery.toJSON();
+  }
+
+  async update(_id, { imgSrc, linkUrl, order }) {
     await this.proxy.update({ _id }, { $set: {
-      name, title, discription, price, priceOld, sales,
+      imgSrc, linkUrl, order,
       updated_time: Date.now(),
     } });
     return await this.fetchById(_id);
   }
 
   async delete(_id) {
-    const order = await this.proxy.findOneAndRemove({ _id });
-    return order && order.toJSON();
+    const gallery = await this.proxy.findOneAndRemove({ _id });
+    return gallery && gallery.toJSON();
   }
 
 }
 
-module.exports = OrderConnector;
+module.exports = GalleryConnector;
