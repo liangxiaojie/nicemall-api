@@ -6,8 +6,15 @@ class GoodsConnector {
     this.proxy = this.ctx.app.model.Goods;
   }
 
-  async fetch(query, first, skip) {
-    const goodses = await this.proxy.find(query).limit(first).skip(skip);
+  async fetch(query, first, skip, sortBy) {
+    const cursor = this.proxy.find(query);
+
+    if (sortBy) cursor.sort([[ `${sortBy}`, -1 ]]);
+    if (skip) cursor.skip(skip);
+    if (first) cursor.limit(first);
+
+    const goodses = await cursor.exec();
+
     return goodses.map(g => g.toJSON());
   }
 

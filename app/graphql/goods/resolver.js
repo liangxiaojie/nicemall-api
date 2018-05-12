@@ -2,8 +2,8 @@
 
 module.exports = {
   Query: {
-    goodses(root, { query, skip, first }, ctx) {
-      return ctx.connector.goods.fetch(query, first, skip);
+    goodses(root, { query, skip, first, sortBy }, ctx) {
+      return ctx.connector.goods.fetch(query, first, skip, sortBy);
     },
     goods(root, { _id }, ctx) {
       return ctx.connector.goods.fetchById(_id);

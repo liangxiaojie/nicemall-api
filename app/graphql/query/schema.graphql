@@ -4,7 +4,7 @@ type Query {
   user(_id: ID!): User
 
   # 商品列表
-  goodses(query: GoodsInput, first: Int!, skip: Int): [Goods!]!
+  goodses(query: GoodsQueryInput, first: Int!, skip: Int, sortBy: String): [Goods!]!
   # 根据ID获取商品详情
   goods(_id: ID!): Goods
 
