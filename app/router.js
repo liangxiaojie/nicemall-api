@@ -10,4 +10,5 @@ module.exports = app => {
   app.post('/api/auth/login', controller.auth.login);
   app.post('/api/auth/register', controller.auth.register);
   app.resources('users', '/api/users', controller.user);
+  app.post('/api/uploads', controller.upload);
 };

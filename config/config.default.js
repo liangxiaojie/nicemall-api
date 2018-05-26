@@ -41,5 +41,9 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [ 'graphql' ];
 
+  config.multipart = {
+    fileSize: '50mb',
+  };
+
   return config;
 };
