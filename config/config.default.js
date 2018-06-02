@@ -1,4 +1,6 @@
 'use strict';
+const url = require('url');
+const appConfig = require('../app.config');
 
 module.exports = appInfo => {
   const config = exports = {};
@@ -12,14 +14,20 @@ module.exports = appInfo => {
   };
 
   config.security = {
-    csrf: {
-      ignore: () => true,
-    },
+    domainWhiteList: [ appConfig.Domain ], // .domain.com 安全白名单，以 . 开头
   };
 
   config.cors = {
-    origin: '*',
+    origin: function corsOrigin(ctx) {
+      const origin = ctx.get('origin');
+      const hostname = url.parse(origin).hostname;
+      if (ctx.isSafeDomain(hostname)) {
+        return origin;
+      }
+      return '';
+    },
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+    credentials: true,
   };
 
   config.graphql = {

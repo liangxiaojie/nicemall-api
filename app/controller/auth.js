@@ -23,7 +23,7 @@ exports.wxLogin = async ctx => {
 
 exports.login = async ctx => {
   const createRule = {
-    name: {
+    username: {
       type: 'string',
     },
     password: {
@@ -33,21 +33,48 @@ exports.login = async ctx => {
   // 校验参数
   ctx.validate(createRule);
 
+  const { username, password } = ctx.request.body;
+
   const user = await ctx.model.User.findOne({
-    where: ctx.request.body,
+    username,
+    password,
   });
+
   if (!user) {
     ctx.body = {
-      code: '10000',
-      message: '用户不存在',
+      success: false,
+      message: '用户名或密码错误',
     };
+    return;
   }
 
-  ctx.session.user = user;
+  const data = {
+    username: user.username,
+    roles: user.roles,
+  };
+
+  ctx.session.user = data;
   ctx.body = {
-    code: '0',
-    message: 'success',
-    data: user,
+    success: true,
+    message: '登录成功',
+    data,
+  };
+};
+
+exports.userinfo = async ctx => {
+  ctx.body = {
+    success: true,
+    message: '',
+    data: ctx.session.user,
+  };
+};
+
+exports.logout = async ctx => {
+  ctx.session.user = null;
+  ctx.body = {
+    success: true,
+    message: '',
+    data: null,
   };
 };
 
