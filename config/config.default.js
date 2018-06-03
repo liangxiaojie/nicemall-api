@@ -15,6 +15,9 @@ module.exports = appInfo => {
 
   config.security = {
     domainWhiteList: [ appConfig.Domain ], // .domain.com 安全白名单，以 . 开头
+    csrf: {
+      ignore: () => true,
+    },
   };
 
   config.cors = {
