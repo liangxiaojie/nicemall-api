@@ -1,6 +1,6 @@
 'use strict';
 const url = require('url');
-const appConfig = require('../app.config');
+const { Domain } = require('../app.config');
 
 module.exports = appInfo => {
   const config = exports = {};
@@ -14,7 +14,7 @@ module.exports = appInfo => {
   };
 
   config.security = {
-    domainWhiteList: [ appConfig.Domain ], // .domain.com 安全白名单，以 . 开头
+    domainWhiteList: [ Domain ], // .domain.com 安全白名单，以 . 开头
     csrf: {
       ignore: () => true,
     },
