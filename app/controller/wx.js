@@ -6,6 +6,7 @@ const crypto = require('crypto');
 class wxController extends Controller {
   async index() {
     const { ctx } = this;
+    const query = ctx.request.query;
 
     const rule = {
       signature: {
@@ -22,15 +23,14 @@ class wxController extends Controller {
       },
     };
     // 校验参数
-    ctx.validate(rule, ctx.request.query);
+    ctx.validate(rule, query);
 
     // 1.获取微信服务器Get请求的参数 signature、timestamp、nonce、echostr
-    const { signature, timestamp, nonce, echostr } = ctx.request.body;
+    const { signature, timestamp, nonce, echostr } = query;
     const token = 'asdhfsjsjkdfjkjjjkj';
 
     // 2.将token、timestamp、nonce三个参数进行字典序排序
-    const array = [ token, timestamp, nonce ];
-    array.sort();
+    const array = [ token, timestamp, nonce ].sort();
 
     // 3.将三个参数字符串拼接成一个字符串进行sha1加密
     const tempStr = array.join('');
