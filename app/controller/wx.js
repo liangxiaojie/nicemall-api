@@ -2,7 +2,7 @@
 
 const Controller = require('egg').Controller;
 const crypto = require('crypto');
-const request = require('request-promise');
+const request = require('request-promise-native');
 const { wxConfig, WWW_URL } = require('../../app.config');
 const { getAccessToken } = require('../common');
 
@@ -87,7 +87,7 @@ class wxController extends Controller {
       }],
     };
 
-    const ACCESS_TOKEN = getAccessToken();
+    const ACCESS_TOKEN = await getAccessToken();
     const res = await request({
       method: 'POST',
       uri: `https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${ACCESS_TOKEN}`,
