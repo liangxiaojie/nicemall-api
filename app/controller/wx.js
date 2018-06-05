@@ -3,6 +3,7 @@
 const Controller = require('egg').Controller;
 const crypto = require('crypto');
 const request = require('request-promise-native');
+const { parseString } = require('xml2js');
 const { wxConfig, WWW_URL } = require('../../app.config');
 const { getAccessToken } = require('../common');
 
@@ -96,6 +97,48 @@ class wxController extends Controller {
     });
 
     ctx.body = res;
+  }
+
+  async message() {
+    const { ctx } = this;
+    const body = ctx.request.body;
+    if (body) {
+      const reqData = parseString(body);
+      if (reqData.MsgType === 'event') {
+        switch (reqData.Event) {
+          case 'subscribe': { // 用户订阅事件
+            const content = '欢迎关注!';
+            ctx.body = `<xml>
+              <ToUserName><![CDATA[${reqData.FromUserName}]]></ToUserName>
+              <FromUserName><![CDATA[${reqData.ToUserName}]]></FromUserName>
+              <CreateTime>${Date.now()}</CreateTime>
+              <MsgType><![CDATA[text]]></MsgType>
+              <Content><![CDATA[${content}]]></Content>
+            </xml>`;
+            break;
+          }
+          case 'CLICK': { // 菜单点击事件
+            if (reqData.EventKey === 'LXKF') {
+              const content = '客服电话：0551-62887811';
+              ctx.body = `<xml>
+                <ToUserName><![CDATA[${reqData.FromUserName}]]></ToUserName>
+                <FromUserName><![CDATA[${reqData.ToUserName}]]></FromUserName>
+                <CreateTime>${Date.now()}</CreateTime>
+                <MsgType><![CDATA[text]]></MsgType>
+                <Content><![CDATA[${content}]]></Content>
+              </xml>`;
+            }
+            break;
+          }
+          case 'VIEW': // 链接跳转事件
+            break;
+          default:
+            break;
+        }
+      }
+    } else {
+      ctx.body = 'no request data';
+    }
   }
 }
 

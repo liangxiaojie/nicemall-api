@@ -14,5 +14,6 @@ module.exports = app => {
   router.post('/api/uploads', controller.upload.upload);
 
   router.get('/api/wx', controller.wx.index);
+  router.post('/api/wx', controller.wx.message);
   router.get('/api/wx/createMenu', controller.wx.createMenu);
 };
