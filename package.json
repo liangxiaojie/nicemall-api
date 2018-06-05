@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "await-stream-ready": "^1.0.1",
+    "crypto": "^1.0.1",
     "dataloader": "^1.4.0",
     "egg": "^2.2.1",
     "egg-cors": "^2.0.0",

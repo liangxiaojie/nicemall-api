@@ -9,7 +9,7 @@ type Gallery {
 }
 
 input GalleryInput {
-  imgSrc: String
+  imgSrc: String!
   linkUrl: String
   order: Int
 }

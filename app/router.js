@@ -12,4 +12,6 @@ module.exports = app => {
   router.get('/api/auth/userinfo', controller.auth.userinfo);
   router.resources('users', '/api/users', controller.user);
   router.post('/api/uploads', controller.upload.upload);
+
+  router.get('/api/wx', controller.wx.index);
 };
