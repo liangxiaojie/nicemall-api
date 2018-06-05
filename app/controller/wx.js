@@ -103,39 +103,41 @@ class wxController extends Controller {
     const { ctx } = this;
     const body = ctx.request.body;
     if (body) {
-      const reqData = parseString(body);
-      if (reqData.MsgType === 'event') {
-        switch (reqData.Event) {
-          case 'subscribe': { // 用户订阅事件
-            const content = '欢迎关注!';
-            ctx.body = `<xml>
-              <ToUserName><![CDATA[${reqData.FromUserName}]]></ToUserName>
-              <FromUserName><![CDATA[${reqData.ToUserName}]]></FromUserName>
-              <CreateTime>${Date.now()}</CreateTime>
-              <MsgType><![CDATA[text]]></MsgType>
-              <Content><![CDATA[${content}]]></Content>
-            </xml>`;
-            break;
-          }
-          case 'CLICK': { // 菜单点击事件
-            if (reqData.EventKey === 'LXKF') {
-              const content = '客服电话：0551-62887811';
+      parseString(body, function(err, result) {
+        const reqData = result.xml;
+        if (reqData.MsgType[0] === 'event') {
+          switch (reqData.Event[0]) {
+            case 'subscribe': { // 用户订阅事件
+              const content = '欢迎关注!';
               ctx.body = `<xml>
-                <ToUserName><![CDATA[${reqData.FromUserName}]]></ToUserName>
-                <FromUserName><![CDATA[${reqData.ToUserName}]]></FromUserName>
+                <ToUserName><![CDATA[${reqData.FromUserName[0]}]]></ToUserName>
+                <FromUserName><![CDATA[${reqData.ToUserName[0]}]]></FromUserName>
                 <CreateTime>${Date.now()}</CreateTime>
                 <MsgType><![CDATA[text]]></MsgType>
                 <Content><![CDATA[${content}]]></Content>
               </xml>`;
+              break;
             }
-            break;
+            case 'CLICK': { // 菜单点击事件
+              if (reqData.EventKey[0] === 'LXKF') {
+                const content = '客服电话：0551-62887811';
+                ctx.body = `<xml>
+                  <ToUserName><![CDATA[${reqData.FromUserName[0]}]]></ToUserName>
+                  <FromUserName><![CDATA[${reqData.ToUserName[0]}]]></FromUserName>
+                  <CreateTime>${Date.now()}</CreateTime>
+                  <MsgType><![CDATA[text]]></MsgType>
+                  <Content><![CDATA[${content}]]></Content>
+                </xml>`;
+              }
+              break;
+            }
+            case 'VIEW': // 链接跳转事件
+              break;
+            default:
+              break;
           }
-          case 'VIEW': // 链接跳转事件
-            break;
-          default:
-            break;
         }
-      }
+      });
     } else {
       ctx.body = 'no request data';
     }
