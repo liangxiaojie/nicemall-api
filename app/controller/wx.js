@@ -105,22 +105,11 @@ class wxController extends Controller {
     if (body) {
       parseString(body, function(err, result) {
         const reqData = result.xml;
-        if (reqData.MsgType[0] === 'event') {
-          switch (reqData.Event[0]) {
-            case 'subscribe': { // 用户订阅事件
-              const content = '欢迎关注!';
-              ctx.body = `<xml>
-                <ToUserName><![CDATA[${reqData.FromUserName[0]}]]></ToUserName>
-                <FromUserName><![CDATA[${reqData.ToUserName[0]}]]></FromUserName>
-                <CreateTime>${Date.now()}</CreateTime>
-                <MsgType><![CDATA[text]]></MsgType>
-                <Content><![CDATA[${content}]]></Content>
-              </xml>`;
-              break;
-            }
-            case 'CLICK': { // 菜单点击事件
-              if (reqData.EventKey[0] === 'LXKF') {
-                const content = '客服电话：0551-62887811';
+        switch (reqData.MsgType[0]) {
+          case 'event': {
+            switch (reqData.Event[0]) {
+              case 'subscribe': { // 用户订阅事件
+                const content = '欢迎关注!';
                 ctx.body = `<xml>
                   <ToUserName><![CDATA[${reqData.FromUserName[0]}]]></ToUserName>
                   <FromUserName><![CDATA[${reqData.ToUserName[0]}]]></FromUserName>
@@ -128,14 +117,45 @@ class wxController extends Controller {
                   <MsgType><![CDATA[text]]></MsgType>
                   <Content><![CDATA[${content}]]></Content>
                 </xml>`;
+                break;
               }
-              break;
+              case 'CLICK': { // 菜单点击事件
+                if (reqData.EventKey[0] === 'LXKF') {
+                  const content = '客服电话：0551-62887811';
+                  ctx.body = `<xml>
+                    <ToUserName><![CDATA[${reqData.FromUserName[0]}]]></ToUserName>
+                    <FromUserName><![CDATA[${reqData.ToUserName[0]}]]></FromUserName>
+                    <CreateTime>${Date.now()}</CreateTime>
+                    <MsgType><![CDATA[text]]></MsgType>
+                    <Content><![CDATA[${content}]]></Content>
+                  </xml>`;
+                }
+                break;
+              }
+              case 'VIEW': // 链接跳转事件
+                break;
+              default:
+                break;
             }
-            case 'VIEW': // 链接跳转事件
-              break;
-            default:
-              break;
+            break;
           }
+          case 'text': // 文本消息
+          case 'image': // 图片消息
+          case 'voice': // 语音消息
+          case 'video': // 视频消息
+          case 'shortvideo': // 小视频消息
+            ctx.body = `<xml>
+              <ToUserName><![CDATA[${reqData.FromUserName[0]}]]></ToUserName>
+              <FromUserName><![CDATA[${reqData.ToUserName[0]}]]></FromUserName>
+              <CreateTime>${reqData.CreateTime[0]}</CreateTime>
+              <MsgType><![CDATA[transfer_customer_service]]></MsgType>
+            </xml>`;
+            break;
+          case 'location': // 地理位置消息
+          case 'link': // 链接消息
+            break;
+          default:
+            break;
         }
       });
     } else {
