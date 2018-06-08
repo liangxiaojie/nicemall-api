@@ -10,6 +10,7 @@ module.exports = app => {
 
   // router.post('/api/auth/register', controller.auth.register);
   router.post('/api/auth/wxLogin', controller.auth.wxLogin);
+  router.get('/api/auth/wxAccessToken', controller.auth.wxAccessToken);
   router.post('/api/auth/login', controller.auth.login);
   router.post('/api/auth/logout', controller.auth.logout);
   router.get('/api/auth/userinfo', controller.auth.userinfo);

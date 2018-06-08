@@ -1,6 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const request = require('request-promise-native');
 const { wxConfig } = require('../../app.config');
 
 class authController extends Controller {
@@ -21,6 +22,59 @@ class authController extends Controller {
       message: 'success',
       data: { url },
     };
+  }
+
+  async wxAccessToken() {
+    const { ctx } = this;
+    const query = ctx.request.query;
+
+    const rule = {
+      code: {
+        type: 'string',
+      },
+      state: {
+        type: 'string',
+      },
+    };
+    // 校验参数
+    ctx.validate(rule, query);
+
+    const { code } = query;
+
+    const res = await request(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxConfig.appid}&secret=${wxConfig.secret}&code=${code}&grant_type=authorization_code`);
+    const { access_token, expires_in, refresh_token, openid, scope } = res;
+    ctx.body = {
+      access_token, expires_in, refresh_token, openid, scope,
+    };
+  }
+
+  async wxRefreshToken() {
+    const { ctx } = this;
+
+    const refresh_token = '';
+    const res = await request(`https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=${wxConfig.appid}&grant_type=refresh_token&refresh_token=${refresh_token}`);
+
+    ctx.body = res;
+  }
+
+  async wxCheckAuth() {
+    const { ctx } = this;
+
+    const access_token = '';
+    const openid = '';
+    const res = await request(`https://api.weixin.qq.com/sns/auth?access_token=${access_token}&openid=${openid}`);
+
+    ctx.body = res;
+  }
+
+  async wxUserinfo() {
+    const { ctx } = this;
+
+    const access_token = '';
+    const openid = '';
+    const res = await request(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`);
+
+    ctx.body = res;
   }
 
   async login() {
