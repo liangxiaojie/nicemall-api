@@ -44,10 +44,12 @@ class authController extends Controller {
     const query = ctx.request.body;
     const { code } = query;
 
-    const res = await request(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxConfig.appid}&secret=${wxConfig.secret}&code=${code}&grant_type=authorization_code`);
+    let res = await request(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxConfig.appid}&secret=${wxConfig.secret}&code=${code}&grant_type=authorization_code`);
+    res = JSON.parse(res);
     const { access_token, expires_in, refresh_token, openid, scope } = res;
 
-    const userinfo = await request(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`);
+    let userinfo = await request(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`);
+    userinfo = JSON.parse(userinfo);
 
     ctx.body = {
       userinfo,
