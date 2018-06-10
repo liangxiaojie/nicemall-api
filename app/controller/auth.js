@@ -2,49 +2,21 @@
 
 const Controller = require('egg').Controller;
 const request = require('request-promise-native');
-const { wxConfig } = require('../../app.config');
+const { wxConfig, WWW_URL } = require('../../app.config');
 
 class authController extends Controller {
   async wxLogin() {
     const { ctx } = this;
     const { successUrl } = ctx.request.body;
+    const redirectUrl = encodeURIComponent(`${WWW_URL}/loginSuccess`);
 
     // snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息）
-    const url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + wxConfig.appid +
-      '&redirect_uri=' + encodeURIComponent(successUrl) +
-      '&response_type=code' +
-      '&scope=snsapi_userinfo' +
-      '&state=xx' +
-      '#wechat_redirect';
+    const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxConfig.appid}&redirect_uri=${redirectUrl}&response_type=code&scope=snsapi_userinfo&state=${successUrl}#wechat_redirect`;
 
     ctx.body = {
       success: true,
       message: 'success',
       data: { url },
-    };
-  }
-
-  async wxAccessToken() {
-    const { ctx } = this;
-    const query = ctx.request.query;
-
-    const rule = {
-      code: {
-        type: 'string',
-      },
-      state: {
-        type: 'string',
-      },
-    };
-    // 校验参数
-    ctx.validate(rule, query);
-
-    const { code } = query;
-
-    const res = await request(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxConfig.appid}&secret=${wxConfig.secret}&code=${code}&grant_type=authorization_code`);
-    const { access_token, expires_in, refresh_token, openid, scope } = res;
-    ctx.body = {
-      access_token, expires_in, refresh_token, openid, scope,
     };
   }
 
@@ -69,12 +41,17 @@ class authController extends Controller {
 
   async wxUserinfo() {
     const { ctx } = this;
+    const query = ctx.request.body;
+    const { code } = query;
 
-    const access_token = '';
-    const openid = '';
-    const res = await request(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`);
+    const res = await request(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxConfig.appid}&secret=${wxConfig.secret}&code=${code}&grant_type=authorization_code`);
+    const { access_token, expires_in, refresh_token, openid, scope } = res;
 
-    ctx.body = res;
+    const userinfo = await request(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`);
+
+    ctx.body = {
+      userinfo,
+    };
   }
 
   async login() {
