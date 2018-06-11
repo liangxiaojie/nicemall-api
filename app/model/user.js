@@ -5,20 +5,20 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
-    wechat_number: String,
+    openid: String,
     nickname: String,
-    avatar: String,
-    realname: String,
-    username: String,
-    password: String,
-    roles: Array,
-    sex: Number,
-    country: String,
+    sex: String,
+    province: String,
     city: String,
+    country: String,
+    headimgurl: String,
+    privilege: Array,
+    unionid: String,
+    created_at: {
+      type: Date,
+      default: Date.now(),
+    },
     credit_score: Number,
-    last_login_at: Date,
-    created_at: Date,
-    updated_at: Date,
   });
 
   return mongoose.model('User', UserSchema);

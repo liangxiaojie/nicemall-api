@@ -1,7 +1,10 @@
 # 查询操作
 type Query {
-  # 根据ID获取用户信息
-  user(_id: ID!): User
+  # 首页轮播图列表
+  gallerys: [Gallery!]!
+
+  # 用户列表
+  users: [User!]!
 
   # 商品列表
   goodses(query: GoodsQueryInput, first: Int!, skip: Int, sortBy: String): [Goods!]!
@@ -19,6 +22,4 @@ type Query {
   # 收货地址列表
   deliveryAddresses(user_id: ID!): [DeliveryAddress!]!
 
-  # 首页轮播图列表
-  gallerys: [Gallery!]!
 }
