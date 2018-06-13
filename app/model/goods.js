@@ -13,8 +13,14 @@ module.exports = app => {
     price: Number,
     priceOld: Number,
     store_nums: Number,
-    sales: Number,
-    mark: Number,
+    sales: {
+      type: Number,
+      default: 0,
+    },
+    mark: {
+      type: Number,
+      default: 0,
+    },
     status: Number,
     up_time: Date,
     down_time: Date,
