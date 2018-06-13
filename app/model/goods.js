@@ -8,6 +8,7 @@ module.exports = app => {
     name: String,
     discription: String,
     type: Number,
+    imgSrc: String,
     images: Array,
     price: Number,
     priceOld: Number,

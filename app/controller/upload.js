@@ -11,7 +11,7 @@ class UploadAjaxController extends Controller {
   async upload() {
     const stream = await this.ctx.getFileStream();
     const file = path.parse(stream.filename);
-    const filename = encodeURIComponent(file.name) + '_' + md5(stream) + file.ext.toLowerCase();
+    const filename = encodeURIComponent(file.name).substr(0, 10) + '_' + md5(stream) + file.ext.toLowerCase();
     const target = path.join(this.config.baseDir, 'app/public/uploads', filename);
     const writeStream = fs.createWriteStream(target);
     try {
