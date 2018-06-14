@@ -7,6 +7,9 @@ class GoodsConnector {
   }
 
   async fetch(query, first, skip, sortBy) {
+    if (query && query.type === -1) {
+      delete query.type;
+    }
     const cursor = this.proxy.find(query);
 
     if (sortBy) cursor.sort([[ `${sortBy}`, -1 ]]);
@@ -23,18 +26,18 @@ class GoodsConnector {
     return goods && goods.toJSON();
   }
 
-  async create({ name, title, discription, imgSrc, store_nums, price, priceOld, sales }) {
+  async create({ name, type, title, discription, imgSrc, store_nums, price, priceOld, sales }) {
     const now = Date.now();
     const goods = await this.proxy.create({
-      name, title, discription, imgSrc, store_nums, price, priceOld, sales,
+      name, type, title, discription, imgSrc, store_nums, price, priceOld, sales,
       created_time: now, updated_time: now,
     });
     return goods.toJSON();
   }
 
-  async update(_id, { name, title, discription, imgSrc, store_nums, price, priceOld, sales }) {
+  async update(_id, { name, type, title, discription, imgSrc, store_nums, price, priceOld, sales }) {
     await this.proxy.update({ _id }, { $set: {
-      name, title, discription, imgSrc, store_nums, price, priceOld, sales,
+      name, type, title, discription, imgSrc, store_nums, price, priceOld, sales,
       updated_time: Date.now(),
     } });
     return await this.fetchById(_id);

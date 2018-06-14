@@ -51,6 +51,8 @@ input GoodsQueryInput {
 input GoodsInput {
   # 商品名称
   name: String!
+  # 商品类型 0:普通商品 1:租赁商品 2:0元购商品
+  type: Int!
   # 商品描述
   discription: String
   # 商品图片
