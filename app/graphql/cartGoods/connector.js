@@ -6,6 +6,19 @@ class GoodsConnector {
     this.proxy = this.ctx.app.model.CartGoods;
   }
 
+  async fetchByUserId(user_id) {
+    const cursor = this.proxy.find({ user_id });
+
+    const data = await cursor.exec();
+
+    return data.map(d => d.toJSON());
+  }
+
+  async fetchById(_id) {
+    const data = await this.proxy.findById(_id);
+    return data && data.toJSON();
+  }
+
   async create({ cart_id, goods_id, goods_type, number, spec }) {
     const now = Date.now();
     const cart = await this.proxy.create({

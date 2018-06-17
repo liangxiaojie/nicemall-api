@@ -2,7 +2,9 @@
 
 module.exports = {
   Query: {
-
+    cartGoodses(root, { user_id }, ctx) {
+      return ctx.connector.cartGoods.fetchByUserId(user_id);
+    },
   },
   Mutation: {
     addCartGoods(root, { input }, ctx) {
