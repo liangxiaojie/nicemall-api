@@ -1,18 +1,18 @@
 # 收货地址
 type DeliveryAddress {
+  _id: ID!
   user_id: ID!
-  consignee: String,
-  phone_number: String,
-  address: String,
-  is_default: Boolean,
+  consignee: String
+  phone_number: String
+  address: String
+  is_default: Boolean
   created_time: Date
   updated_time: Date
 }
 
 input DeliveryAddressInput {
-  user_id: ID!
-  consignee: String,
-  phone_number: String,
-  address: String,
-  is_default: Boolean,
+  consignee: String
+  phone_number: String
+  address: String
+  is_default: Boolean
 }

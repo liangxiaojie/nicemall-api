@@ -20,6 +20,6 @@ type Query {
   order(_id: ID!): Order
 
   # 收货地址列表
-  deliveryAddresses(user_id: ID!): [DeliveryAddress!]!
+  deliveryAddresses: [DeliveryAddress!]!
 
 }

@@ -67,6 +67,8 @@ class authController extends Controller {
       }
     }
 
+    ctx.session.wxUser = user;
+
     ctx.body = {
       userinfo: user,
     };
