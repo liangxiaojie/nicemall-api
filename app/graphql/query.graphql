@@ -6,7 +6,7 @@ type Query {
   # 用户列表
   users: [User!]! @auth
   # 当前登录用户信息
-  profile: User! @auth
+  wxUserinfo(code: String): User!
 
   # 商品列表
   goodses(query: GoodsQueryInput, first: Int!, skip: Int, sortBy: String): [Goods!]!

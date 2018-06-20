@@ -52,7 +52,8 @@ class authController extends Controller {
     }
 
     if (!user) {
-      throw new Error('登录失败');
+      ctx.status = 401;
+      throw new Error('Not logged in');
     }
 
     ctx.body = {
