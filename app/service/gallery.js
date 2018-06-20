@@ -1,8 +1,10 @@
 'use strict';
 
-class GalleryConnector {
+const Service = require('egg').Service;
+
+class GalleryService extends Service {
   constructor(ctx) {
-    this.ctx = ctx;
+    super(ctx);
     this.proxy = this.ctx.app.model.Gallery;
   }
 
@@ -37,7 +39,6 @@ class GalleryConnector {
     const gallery = await this.proxy.findOneAndRemove({ _id });
     return gallery && gallery.toJSON();
   }
-
 }
 
-module.exports = GalleryConnector;
+module.exports = GalleryService;

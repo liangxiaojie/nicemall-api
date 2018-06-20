@@ -1,8 +1,10 @@
 'use strict';
 
-class GoodsConnector {
+const Service = require('egg').Service;
+
+class GoodsService extends Service {
   constructor(ctx) {
-    this.ctx = ctx;
+    super(ctx);
     this.proxy = this.ctx.app.model.Goods;
   }
 
@@ -47,7 +49,6 @@ class GoodsConnector {
     const goods = await this.proxy.findOneAndRemove({ _id });
     return goods && goods.toJSON();
   }
-
 }
 
-module.exports = GoodsConnector;
+module.exports = GoodsService;

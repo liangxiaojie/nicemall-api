@@ -1,20 +1,20 @@
 'use strict';
 
-module.exports = {
+exports.resolver = {
   Query: {
     gallerys(root, params, ctx) {
-      return ctx.connector.gallery.fetch();
+      return ctx.service.gallery.fetch();
     },
   },
   Mutation: {
     createGallery(root, { input }, ctx) {
-      return ctx.connector.gallery.create(input);
+      return ctx.service.gallery.create(input);
     },
     updateGallery(root, { _id, input }, ctx) {
-      return ctx.connector.gallery.update(_id, input);
+      return ctx.service.gallery.update(_id, input);
     },
     deleteGallery(root, { _id }, ctx) {
-      return ctx.connector.gallery.delete(_id);
+      return ctx.service.gallery.delete(_id);
     },
   },
 };

@@ -32,11 +32,28 @@ module.exports = class AuthDirective extends SchemaDirectiveVisitor {
       field.resolve = async (...args) => {
         // context
         const ctx = args[2];
+        // 如果该字段不需要角色，则返回 objectType：
+        const requiredRole = field[SYMBOL_AUTH_PERMISSION] || objectType[SYMBOL_AUTH_PERMISSION];
 
+        if (!requiredRole) {
+          return resolve(...args);
+        }
         // 未登录
         if (!ctx.user) {
           ctx.status = 401;
           throw new Error('Not logged in');
+        }
+        // 超级管理员
+        if (ctx.user.id === 1) {
+          return resolve(...args);
+        }
+        // 当前的菜单
+        const { menus = [] } = ctx.user;
+
+        // 检查权限
+        if (!menus.some(n => n.permission === requiredRole)) {
+          ctx.status = 403;
+          throw new Error('Not authorized');
         }
 
         return resolve(...args);

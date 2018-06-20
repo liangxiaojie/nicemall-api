@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+exports.resolver = {
   Query: {
     orders(root, { query, skip, first }, ctx) {
       return ctx.connector.order.fetch(query, first, skip);

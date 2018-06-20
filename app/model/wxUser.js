@@ -4,7 +4,7 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
 
-  const UserSchema = new Schema({
+  const WxUserSchema = new Schema({
     openid: String,
     nickname: String,
     sex: String,
@@ -21,5 +21,5 @@ module.exports = app => {
     credit_score: Number,
   });
 
-  return mongoose.model('User', UserSchema);
+  return mongoose.model('WxUser', WxUserSchema);
 };

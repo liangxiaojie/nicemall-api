@@ -4,7 +4,9 @@ type Query {
   gallerys: [Gallery!]!
 
   # 用户列表
-  users: [User!]!
+  users: [User!]! @auth
+  # 当前登录用户信息
+  profile: User! @auth
 
   # 商品列表
   goodses(query: GoodsQueryInput, first: Int!, skip: Int, sortBy: String): [Goods!]!
@@ -12,14 +14,14 @@ type Query {
   goods(_id: ID!): Goods
 
   # 根据用户ID查询用户购物车商品列表
-  cartGoodses(user_id: ID!): [CartGoods!]!
+  cartGoodses(user_id: ID!): [CartGoods!]! @auth
 
   # 订单列表
-  orders(query: OrderInput, first: Int!, skip: Int): [Order!]!
+  orders(query: OrderInput, first: Int!, skip: Int): [Order!]! @auth
   # 根据ID获取订单详情
-  order(_id: ID!): Order
+  order(_id: ID!): Order @auth
 
   # 收货地址列表
-  deliveryAddresses: [DeliveryAddress!]!
+  deliveryAddresses: [DeliveryAddress!]! @auth
 
 }

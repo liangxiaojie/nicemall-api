@@ -1,8 +1,10 @@
 'use strict';
 
-class GoodsConnector {
+const Service = require('egg').Service;
+
+class DeliveryAddressService extends Service {
   constructor(ctx) {
-    this.ctx = ctx;
+    super(ctx);
     this.proxy = this.ctx.app.model.DeliveryAddress;
   }
 
@@ -35,4 +37,4 @@ class GoodsConnector {
 
 }
 
-module.exports = GoodsConnector;
+module.exports = DeliveryAddressService;
