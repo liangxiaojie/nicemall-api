@@ -10,10 +10,16 @@ exports.mongoose = {
 
 exports.graphql = {
   enable: true,
-  package: 'egg-graphql',
+  package: 'egg-graphql-apollo',
+};
+
+exports.passport = {
+  enable: true,
+  package: 'egg-passport',
 };
 
 exports.validate = {
+  enable: true,
   package: 'egg-validate',
 };
 

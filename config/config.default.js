@@ -16,7 +16,7 @@ module.exports = appInfo => {
   config.security = {
     domainWhiteList: [ Domain ], // .domain.com 安全白名单，以 . 开头
     csrf: {
-      ignore: () => true,
+      enable: false,
     },
   };
 
@@ -50,7 +50,10 @@ module.exports = appInfo => {
   };
 
   // add your config here
-  config.middleware = [ 'graphql' ];
+  config.middleware = [
+    'errorHandler',
+    'graphql',
+  ];
 
   config.multipart = {
     fileSize: '50mb',

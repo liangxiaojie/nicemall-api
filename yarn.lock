@@ -332,19 +332,19 @@ apollo-link@^1.2.1:
     apollo-utilities "^1.0.0"
     zen-observable-ts "^0.8.9"
 
-apollo-server-core@^1.3.5:
-  version "1.3.5"
-  resolved "http://registry.npm.taobao.org/apollo-server-core/download/apollo-server-core-1.3.5.tgz#36da3a6ee52b92fc4bb5710d44ced6b8fafebe2d"
+apollo-server-core@^1.3.6:
+  version "1.3.6"
+  resolved "http://registry.npm.taobao.org/apollo-server-core/download/apollo-server-core-1.3.6.tgz#08636243c2de56fa8c267d68dd602cb1fbd323e3"
   dependencies:
     apollo-cache-control "^0.1.0"
     apollo-tracing "^0.1.0"
     graphql-extensions "^0.0.x"
 
-apollo-server-koa@^1.2.0:
-  version "1.3.5"
-  resolved "http://registry.npm.taobao.org/apollo-server-koa/download/apollo-server-koa-1.3.5.tgz#5d0b5bf7c3253c659481a1f2e5a3587a2f1ebd18"
+apollo-server-koa@^1.3.3:
+  version "1.3.6"
+  resolved "http://registry.npm.taobao.org/apollo-server-koa/download/apollo-server-koa-1.3.6.tgz#51771d856cc4d22373ebcd869e4ad8f4e53ab45c"
   dependencies:
-    apollo-server-core "^1.3.5"
+    apollo-server-core "^1.3.6"
     apollo-server-module-graphiql "^1.3.4"
 
 apollo-server-module-graphiql@^1.3.4:
@@ -2146,15 +2146,15 @@ egg-development@^2.2.0:
     debounce "^1.1.0"
     multimatch "^2.1.0"
 
-egg-graphql@^2.1.0:
-  version "2.1.0"
-  resolved "http://registry.npm.taobao.org/egg-graphql/download/egg-graphql-2.1.0.tgz#934af7e06bd09b2e9d2d6f3df2b7f63bccad02bd"
+egg-graphql-apollo@^0.1.6:
+  version "0.1.6"
+  resolved "http://registry.npm.taobao.org/egg-graphql-apollo/download/egg-graphql-apollo-0.1.6.tgz#3bf8bb9462efc51e3505d86a99db569a81cf6734"
   dependencies:
-    apollo-server-koa "^1.2.0"
-    graphql "^0.11.7"
-    graphql-tag "^2.5.0"
-    graphql-tools "^2.19.0"
-    lodash "4.17.4"
+    apollo-server-koa "^1.3.3"
+    graphql "^0.13.2"
+    graphql-tag "^2.8.0"
+    graphql-tools "^2.23.1"
+    lodash.merge "^4.6.1"
 
 egg-i18n@^2.0.0:
   version "2.0.0"
@@ -2235,6 +2235,13 @@ egg-onerror@^2.0.0:
     koa-onerror "^4.0.0"
     mustache "^2.3.0"
     stack-trace "^0.0.10"
+
+egg-passport@^2.0.1:
+  version "2.0.1"
+  resolved "http://registry.npm.taobao.org/egg-passport/download/egg-passport-2.0.1.tgz#ac98233f5e6eb563ed730fd7347c58ab64fb8474"
+  dependencies:
+    debug "^3.1.0"
+    passport "^0.3.2"
 
 egg-path-matching@^1.0.0, egg-path-matching@^1.0.1:
   version "1.0.1"
@@ -3196,11 +3203,11 @@ graphql-extensions@^0.0.x, graphql-extensions@~0.0.9:
     core-js "^2.5.3"
     source-map-support "^0.5.1"
 
-graphql-tag@^2.5.0:
-  version "2.9.1"
-  resolved "http://registry.npm.taobao.org/graphql-tag/download/graphql-tag-2.9.1.tgz#1ab090ef7d3518b06d8c97d1393672145fe91587"
+graphql-tag@^2.8.0:
+  version "2.9.2"
+  resolved "http://registry.npm.taobao.org/graphql-tag/download/graphql-tag-2.9.2.tgz#2f60a5a981375f430bf1e6e95992427dc18af686"
 
-graphql-tools@^2.19.0:
+graphql-tools@^2.23.1:
   version "2.24.0"
   resolved "http://registry.npm.taobao.org/graphql-tools/download/graphql-tools-2.24.0.tgz#bbacaad03924012a0edb8735a5e65df5d5563675"
   dependencies:
@@ -3210,11 +3217,11 @@ graphql-tools@^2.19.0:
     iterall "^1.1.3"
     uuid "^3.1.0"
 
-graphql@^0.11.7:
-  version "0.11.7"
-  resolved "http://registry.npm.taobao.org/graphql/download/graphql-0.11.7.tgz#e5abaa9cb7b7cccb84e9f0836bf4370d268750c6"
+graphql@^0.13.2:
+  version "0.13.2"
+  resolved "http://registry.npm.taobao.org/graphql/download/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
   dependencies:
-    iterall "1.1.3"
+    iterall "^1.2.1"
 
 growl@1.10.3:
   version "1.10.3"
@@ -3818,11 +3825,7 @@ istanbul-reports@^1.4.0:
   dependencies:
     handlebars "^4.0.3"
 
-iterall@1.1.3:
-  version "1.1.3"
-  resolved "http://registry.npm.taobao.org/iterall/download/iterall-1.1.3.tgz#1cbbff96204056dde6656e2ed2e2226d0e6d72c9"
-
-iterall@^1.1.3:
+iterall@^1.1.3, iterall@^1.2.1:
   version "1.2.2"
   resolved "http://registry.npm.taobao.org/iterall/download/iterall-1.2.2.tgz#92d70deb8028e0c39ff3164fdbf4d8b088130cd7"
 
@@ -4086,9 +4089,9 @@ lodash.get@4.4.2:
   version "4.4.2"
   resolved "http://registry.npm.taobao.org/lodash.get/download/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
 
-lodash@4.17.4:
-  version "4.17.4"
-  resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+lodash.merge@^4.6.1:
+  version "4.6.1"
+  resolved "http://registry.npm.taobao.org/lodash.merge/download/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
 
 lodash@^4.13.1, lodash@^4.17.10:
   version "4.17.10"
@@ -4820,6 +4823,17 @@ pascalcase@^0.1.1:
   version "0.1.1"
   resolved "http://registry.npm.taobao.org/pascalcase/download/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
 
+passport-strategy@1.x.x:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/passport-strategy/download/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
+
+passport@^0.3.2:
+  version "0.3.2"
+  resolved "http://registry.npm.taobao.org/passport/download/passport-0.3.2.tgz#9dd009f915e8fe095b0124a01b8f82da07510102"
+  dependencies:
+    passport-strategy "1.x.x"
+    pause "0.0.1"
+
 path-case@^2.1.0:
   version "2.1.1"
   resolved "http://registry.npm.taobao.org/path-case/download/path-case-2.1.1.tgz#94b8037c372d3fe2906e465bb45e25d226e8eea5"
@@ -4881,6 +4895,10 @@ path-type@^3.0.0:
   resolved "http://registry.npm.taobao.org/path-type/download/path-type-3.0.0.tgz#cef31dc8e0a1a3bb0d105c0cd97cf3bf47f4e36f"
   dependencies:
     pify "^3.0.0"
+
+pause@0.0.1:
+  version "0.0.1"
+  resolved "http://registry.npm.taobao.org/pause/download/pause-0.0.1.tgz#1d408b3fdb76923b9543d96fb4c9dfd535d9cb5d"
 
 pedding@^1.1.0:
   version "1.1.0"

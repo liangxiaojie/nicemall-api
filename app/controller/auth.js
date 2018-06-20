@@ -41,33 +41,19 @@ class authController extends Controller {
 
   async wxUserinfo() {
     const { ctx } = this;
-    const query = ctx.request.body;
-    const { code } = query;
-
+    const { code } = ctx.request.body;
     let user;
 
-    if (query.openid) {
-      user = await ctx.model.User.findOne({ openid: query.openid });
-    } else {
-      let res = await request(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wxConfig.appid}&secret=${wxConfig.secret}&code=${code}&grant_type=authorization_code`);
-      res = JSON.parse(res);
-      // const { access_token, expires_in, refresh_token, openid, scope } = res;
-      const { access_token, openid } = res;
-      user = await ctx.model.User.findOne({ openid });
-      if (!user) {
-        let userinfo = await request(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`);
-        userinfo = JSON.parse(userinfo);
-        if (userinfo.openid) {
-          const { nickname, sex, province, city, country, headimgurl, privilege, unionid } = userinfo;
-          await ctx.model.User.create({
-            openid, nickname, sex, province, city, country, headimgurl, privilege, unionid,
-          });
-        }
-        user = userinfo;
-      }
+    if (ctx.isAuthenticated() && ctx.user) {
+      user = ctx.user;
+    } else if (code) {
+      user = await ctx.service.wxUser.getWxUserByCode(code);
+      ctx.login(user);
     }
 
-    ctx.session.wxUser = user;
+    if (!user) {
+      throw new Error('登录失败');
+    }
 
     ctx.body = {
       userinfo: user,
