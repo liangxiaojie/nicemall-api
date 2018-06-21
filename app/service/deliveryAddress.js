@@ -13,18 +13,20 @@ class DeliveryAddressService extends Service {
     return orders.map(g => g.toJSON());
   }
 
-  async create({ cart_id, goods_id, goods_type, number, spec }) {
+  async create(user_id, { consignee, phone_number, address, is_default }) {
     const now = Date.now();
     const cart = await this.proxy.create({
-      cart_id, goods_id, goods_type, number, spec,
+      user_id, consignee, phone_number, address, is_default,
       created_time: now, updated_time: now,
     });
+    console.log(cart);
+    
     return cart.toJSON();
   }
 
-  async update(_id, { cart_id, goods_id, goods_type, number, spec }) {
+  async update(_id, { consignee, phone_number, address, is_default }) {
     await this.proxy.update({ _id }, { $set: {
-      cart_id, goods_id, goods_type, number, spec,
+      consignee, phone_number, address, is_default,
       updated: Date.now(),
     } });
     return await this.fetchById(_id);

@@ -2,17 +2,17 @@
 type DeliveryAddress {
   _id: ID!
   user_id: ID!
-  consignee: String
-  phone_number: String
-  address: String
+  consignee: String!
+  phone_number: String!
+  address: String!
   is_default: Boolean
   created_time: Date
   updated_time: Date
 }
 
 input DeliveryAddressInput {
-  consignee: String
-  phone_number: String
-  address: String
+  consignee: String!
+  phone_number: String!
+  address: String!
   is_default: Boolean
 }

@@ -47,14 +47,14 @@ module.exports = class AuthDirective extends SchemaDirectiveVisitor {
         if (ctx.user.id === 1) {
           return resolve(...args);
         }
-        // 当前的菜单
-        const { menus = [] } = ctx.user;
+        // // 当前的菜单
+        // const { menus = [] } = ctx.user;
 
-        // 检查权限
-        if (!menus.some(n => n.permission === requiredRole)) {
-          ctx.status = 403;
-          throw new Error('Not authorized');
-        }
+        // // 检查权限
+        // if (!menus.some(n => n.permission === requiredRole)) {
+        //   ctx.status = 403;
+        //   throw new Error('Not authorized');
+        // }
 
         return resolve(...args);
       };

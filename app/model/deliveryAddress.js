@@ -6,9 +6,10 @@ module.exports = app => {
 
   const DeliveryAddressSchema = new Schema({
     user_id: Schema.Types.ObjectId,
-    goods_id: Schema.Types.ObjectId,
-    number: Number,
-    spec: Array,
+    consignee: String,
+    phone_number: String,
+    address: String,
+    is_default: Boolean,
     created_time: Date,
     updated_time: Date,
   });

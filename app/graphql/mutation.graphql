@@ -22,7 +22,7 @@ type Mutation {
   deleteOrder(_id: ID!): Order
 
   # 添加收货地址
-  addDeliveryAddress(input: DeliveryAddressInput!): DeliveryAddress
+  createDeliveryAddress(input: DeliveryAddressInput!): DeliveryAddress
   # 更新收货地址
   updateDeliveryAddress(_id: ID!, input: DeliveryAddressInput!): DeliveryAddress
   # 删除收货地址
