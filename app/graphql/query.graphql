@@ -17,7 +17,7 @@ type Query {
   cartGoodses(user_id: ID!): [CartGoods!]! @auth
 
   # 订单列表
-  orders(query: OrderInput, first: Int!, skip: Int): [Order!]! @auth
+  orders(query: OrderInput, first: Int!, skip: Int): [Order!]!
   # 根据ID获取订单详情
   order(_id: ID!): Order @auth
 

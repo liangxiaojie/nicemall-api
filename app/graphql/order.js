@@ -3,21 +3,21 @@
 exports.resolver = {
   Query: {
     orders(root, { query, skip, first }, ctx) {
-      return ctx.connector.order.fetch(query, first, skip);
+      return ctx.service.order.fetch(query, first, skip);
     },
     order(root, { _id }, ctx) {
-      return ctx.connector.order.fetchById(_id);
+      return ctx.service.order.fetchById(_id);
     },
   },
   Mutation: {
     createOrder(root, { input }, ctx) {
-      return ctx.connector.order.create(input);
+      return ctx.service.order.create(input);
     },
     updateOrder(root, { _id, input }, ctx) {
-      return ctx.connector.order.update(_id, input);
+      return ctx.service.order.update(_id, input);
     },
     deleteOrder(root, { _id }, ctx) {
-      return ctx.connector.order.delete(_id);
+      return ctx.service.order.delete(_id);
     },
   },
 };
