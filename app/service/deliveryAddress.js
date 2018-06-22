@@ -9,19 +9,22 @@ class DeliveryAddressService extends Service {
   }
 
   async fetch(query, first, skip) {
-    const orders = await this.proxy.find(query).limit(first).skip(skip);
-    return orders.map(g => g.toJSON());
+    const data = await this.proxy.find(query).limit(first).skip(skip);
+    return data.map(g => g.toJSON());
+  }
+
+  async fetchById(_id) {
+    const data = await this.proxy.findById(_id);
+    return data && data.toJSON();
   }
 
   async create(user_id, { consignee, phone_number, address, is_default }) {
     const now = Date.now();
-    const cart = await this.proxy.create({
+    const data = await this.proxy.create({
       user_id, consignee, phone_number, address, is_default,
       created_time: now, updated_time: now,
     });
-    console.log(cart);
-    
-    return cart.toJSON();
+    return data.toJSON();
   }
 
   async update(_id, { consignee, phone_number, address, is_default }) {
@@ -33,8 +36,8 @@ class DeliveryAddressService extends Service {
   }
 
   async delete(_id) {
-    const goods = await this.proxy.findOneAndRemove({ _id });
-    return goods && goods.toJSON();
+    const data = await this.proxy.findOneAndRemove({ _id });
+    return data && data.toJSON();
   }
 
 }

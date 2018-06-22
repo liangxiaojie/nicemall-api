@@ -9,22 +9,22 @@ class OrderService extends Service {
   }
 
   async fetch(query, first, skip) {
-    const orders = await this.proxy.find(query).limit(first).skip(skip);
-    return orders.map(g => g.toJSON());
+    const data = await this.proxy.find(query).limit(first).skip(skip);
+    return data.map(g => g.toJSON());
   }
 
   async fetchById(_id) {
-    const order = await this.proxy.findById(_id);
-    return order && order.toJSON();
+    const data = await this.proxy.findById(_id);
+    return data && data.toJSON();
   }
 
   async create({ name, title, discription, price, priceOld, sales }) {
     const now = Date.now();
-    const order = await this.proxy.create({
+    const data = await this.proxy.create({
       name, title, discription, price, priceOld, sales,
       created_time: now, updated_time: now,
     });
-    return order.toJSON();
+    return data.toJSON();
   }
 
   async update(_id, { name, title, discription, price, priceOld, sales }) {
@@ -36,8 +36,8 @@ class OrderService extends Service {
   }
 
   async delete(_id) {
-    const order = await this.proxy.findOneAndRemove({ _id });
-    return order && order.toJSON();
+    const data = await this.proxy.findOneAndRemove({ _id });
+    return data && data.toJSON();
   }
 }
 

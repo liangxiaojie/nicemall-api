@@ -9,22 +9,22 @@ class GalleryService extends Service {
   }
 
   async fetch() {
-    const gallerys = await this.proxy.find();
-    return gallerys.map(g => g.toJSON());
+    const data = await this.proxy.find();
+    return data.map(g => g.toJSON());
   }
 
   async fetchById(_id) {
-    const gallery = await this.proxy.findById(_id);
-    return gallery && gallery.toJSON();
+    const data = await this.proxy.findById(_id);
+    return data && data.toJSON();
   }
 
   async create({ imgSrc, linkUrl, order }) {
     const now = Date.now();
-    const gallery = await this.proxy.create({
+    const data = await this.proxy.create({
       imgSrc, linkUrl, order,
       created_time: now, updated_time: now,
     });
-    return gallery.toJSON();
+    return data.toJSON();
   }
 
   async update(_id, { imgSrc, linkUrl, order }) {
@@ -36,8 +36,8 @@ class GalleryService extends Service {
   }
 
   async delete(_id) {
-    const gallery = await this.proxy.findOneAndRemove({ _id });
-    return gallery && gallery.toJSON();
+    const data = await this.proxy.findOneAndRemove({ _id });
+    return data && data.toJSON();
   }
 }
 

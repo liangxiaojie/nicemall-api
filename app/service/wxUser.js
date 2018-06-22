@@ -38,8 +38,8 @@ class WxUserService extends Service {
   }
 
   async fetch() {
-    const gallerys = await this.proxy.find();
-    return gallerys.map(g => g.toJSON());
+    const data = await this.proxy.find();
+    return data.map(g => g.toJSON());
   }
 }
 

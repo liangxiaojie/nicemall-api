@@ -10,9 +10,7 @@ class CartGoodsService extends Service {
 
   async fetchByUserId(user_id) {
     const cursor = this.proxy.find({ user_id });
-
     const data = await cursor.exec();
-
     return data.map(d => d.toJSON());
   }
 
@@ -23,11 +21,11 @@ class CartGoodsService extends Service {
 
   async create({ cart_id, goods_id, goods_type, number, spec }) {
     const now = Date.now();
-    const cart = await this.proxy.create({
+    const data = await this.proxy.create({
       cart_id, goods_id, goods_type, number, spec,
       created_time: now, updated_time: now,
     });
-    return cart.toJSON();
+    return data.toJSON();
   }
 
   async update(_id, { cart_id, goods_id, goods_type, number, spec }) {
@@ -39,8 +37,8 @@ class CartGoodsService extends Service {
   }
 
   async delete(_id) {
-    const goods = await this.proxy.findOneAndRemove({ _id });
-    return goods && goods.toJSON();
+    const data = await this.proxy.findOneAndRemove({ _id });
+    return data && data.toJSON();
   }
 }
 

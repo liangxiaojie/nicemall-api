@@ -18,23 +18,23 @@ class GoodsService extends Service {
     if (skip) cursor.skip(skip);
     if (first) cursor.limit(first);
 
-    const goodses = await cursor.exec();
+    const data = await cursor.exec();
 
-    return goodses.map(g => g.toJSON());
+    return data.map(g => g.toJSON());
   }
 
   async fetchById(_id) {
-    const goods = await this.proxy.findById(_id);
-    return goods && goods.toJSON();
+    const data = await this.proxy.findById(_id);
+    return data && data.toJSON();
   }
 
   async create({ name, type, title, discription, imgSrc, store_nums, price, priceOld, sales }) {
     const now = Date.now();
-    const goods = await this.proxy.create({
+    const data = await this.proxy.create({
       name, type, title, discription, imgSrc, store_nums, price, priceOld, sales,
       created_time: now, updated_time: now,
     });
-    return goods.toJSON();
+    return data.toJSON();
   }
 
   async update(_id, { name, type, title, discription, imgSrc, store_nums, price, priceOld, sales }) {
@@ -46,8 +46,8 @@ class GoodsService extends Service {
   }
 
   async delete(_id) {
-    const goods = await this.proxy.findOneAndRemove({ _id });
-    return goods && goods.toJSON();
+    const data = await this.proxy.findOneAndRemove({ _id });
+    return data && data.toJSON();
   }
 }
 
