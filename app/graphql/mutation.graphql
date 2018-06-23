@@ -1,37 +1,37 @@
 # 增删改操作
 type Mutation {
   # 添加商品
-  createGoods(input: GoodsInput!): Goods
+  createGoods(input: GoodsInput!): Goods @auth
   # 更新商品信息
-  updateGoods(_id: ID!, input: GoodsInput!): Goods
+  updateGoods(_id: ID!, input: GoodsInput!): Goods @auth
   # 删除商品
-  deleteGoods(_id: ID!): Goods
+  deleteGoods(_id: ID!): Goods @auth
 
   # 购物车添加商品
-  addCartGoods(input: CartGoodsInput!): CartGoods
+  createCartGoods(input: CartGoodsInput!): CartGoods @auth
   # 更新购物车商品规格信息
-  updateCartGoods(_id: ID!, input: CartGoodsInput!): CartGoods
+  updateCartGoods(_id: ID!, input: CartGoodsInput!): CartGoods @auth
   # 删除购物车商品
-  deleteCartGoods(_id: ID!): CartGoods
+  deleteCartGoods(_id: ID!): CartGoods @auth
 
   # 创建订单
-  createOrder(input: OrderInput!): Order
+  createOrder(input: OrderInput!): Order @auth
   # 更新订单
-  updateOrder(_id: ID!, input: OrderInput!): Order
+  updateOrder(_id: ID!, input: OrderInput!): Order @auth
   # 删除订单
-  deleteOrder(_id: ID!): Order
+  deleteOrder(_id: ID!): Order @auth
 
   # 添加收货地址
-  createDeliveryAddress(input: DeliveryAddressInput!): DeliveryAddress
+  createDeliveryAddress(input: DeliveryAddressInput!): DeliveryAddress @auth
   # 更新收货地址
-  updateDeliveryAddress(_id: ID!, input: DeliveryAddressInput!): DeliveryAddress
+  updateDeliveryAddress(_id: ID!, input: DeliveryAddressInput!): DeliveryAddress @auth
   # 删除收货地址
-  deleteDeliveryAddress(_id: ID!): DeliveryAddress
+  deleteDeliveryAddress(_id: ID!): DeliveryAddress @auth
 
   # 添加轮播图
-  createGallery(input: GalleryInput!): Gallery
+  createGallery(input: GalleryInput!): Gallery @auth
   # 更新轮播图
-  updateGallery(_id: ID!, input: GalleryInput!): Gallery
+  updateGallery(_id: ID!, input: GalleryInput!): Gallery @auth
   # 删除轮播图
-  deleteGallery(_id: ID!): Gallery
+  deleteGallery(_id: ID!): Gallery @auth
 }

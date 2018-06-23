@@ -12,6 +12,11 @@ exports.resolver = {
         ctx.login(user);
       }
 
+      if (process.env.NODE_ENV === 'development') {
+        user = ctx.service.wxUser.getWxUserById('5b2e0dc92d2b644a6c18ed7e');
+        ctx.login(user);
+      }
+
       if (!user) {
         ctx.status = 401;
         throw new Error('Not logged in');

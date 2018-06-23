@@ -19,10 +19,10 @@ class CartGoodsService extends Service {
     return data && data.toJSON();
   }
 
-  async create({ cart_id, goods_id, goods_type, number, spec }) {
+  async create(user_id, { cart_id, goods_id, goods_type, number, spec }) {
     const now = Date.now();
     const data = await this.proxy.create({
-      cart_id, goods_id, goods_type, number, spec,
+      user_id, cart_id, goods_id, goods_type, number, spec,
       created_time: now, updated_time: now,
     });
     return data.toJSON();

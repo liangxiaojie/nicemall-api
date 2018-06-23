@@ -2,13 +2,13 @@
 
 module.exports = {
   Query: {
-    cartGoodses(root, { user_id }, ctx) {
-      return ctx.service.cartGoods.fetchByUserId(user_id);
+    cartGoodses(root, params, ctx) {
+      return ctx.service.cartGoods.fetchByUserId(ctx.user._id);
     },
   },
   Mutation: {
-    addCartGoods(root, { input }, ctx) {
-      return ctx.service.cartGoods.create(input);
+    createCartGoods(root, { input }, ctx) {
+      return ctx.service.cartGoods.create(ctx.user._id, input);
     },
     updateCartGoods(root, { _id, input }, ctx) {
       return ctx.service.cartGoods.update(_id, input);
