@@ -2,6 +2,8 @@ scalar Date
 
 # 权限类型
 enum PermissionEnum {
+  SYS_ADMIN
+
   SYS_INDEX
 
   SYS_USER

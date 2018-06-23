@@ -90,11 +90,14 @@ class authController extends Controller {
     }
 
     const data = {
+      type: 'admin',
+      _id: user._id,
       username: user.username,
       roles: user.roles,
     };
 
-    ctx.session.user = data;
+    ctx.login(data);
+
     ctx.body = {
       success: true,
       message: '登录成功',
@@ -107,13 +110,13 @@ class authController extends Controller {
     ctx.body = {
       success: true,
       message: '',
-      data: ctx.session.user,
+      data: ctx.user,
     };
   }
 
   async logout() {
     const { ctx } = this;
-    ctx.session.user = null;
+    ctx.logout();
     ctx.body = {
       success: true,
       message: '',

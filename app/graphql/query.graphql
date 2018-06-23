@@ -4,7 +4,7 @@ type Query {
   gallerys: [Gallery!]!
 
   # 用户列表
-  users: [User!]! @auth
+  users: [User!]! @auth(require: SYS_ADMIN)
   # 当前登录用户信息
   wxUserinfo(code: String): User!
 

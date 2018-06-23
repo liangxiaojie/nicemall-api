@@ -43,10 +43,6 @@ module.exports = class AuthDirective extends SchemaDirectiveVisitor {
           ctx.status = 401;
           throw new Error('Not logged in');
         }
-        // 超级管理员
-        if (ctx.user.id === 1) {
-          return resolve(...args);
-        }
         // // 当前的菜单
         // const { menus = [] } = ctx.user;
 
