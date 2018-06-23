@@ -5,6 +5,8 @@ const { Domain } = require('../app.config');
 module.exports = appInfo => {
   const config = exports = {};
 
+  const isDebug = !(process.env.NODE_ENV === 'production');
+
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1524393373203_2073';
 
@@ -40,7 +42,7 @@ module.exports = appInfo => {
     // 是否加载到 agent 上，默认关闭
     agent: false,
     // 是否加载开发者工具 graphiql, 默认开启。路由同 router 字段。使用浏览器打开该可见。
-    graphiql: true,
+    graphiql: isDebug,
     // graphQL 路由前的拦截器
     // * onPreGraphQL(ctx) {
     //   console.log(ctx);

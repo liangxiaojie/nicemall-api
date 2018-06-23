@@ -60,7 +60,7 @@ class wxController extends Controller {
         }, {
           name: '0元购物',
           type: 'view',
-          url: `${WWW_URL}/`,
+          url: `${WWW_URL}/mall/zeroMall`,
         }, {
           name: '服务产品',
           type: 'view',

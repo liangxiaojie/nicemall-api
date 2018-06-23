@@ -1,3 +1,4 @@
+'use strict';
 
 module.exports = (options, app) => async (ctx, next) => {
   try {
