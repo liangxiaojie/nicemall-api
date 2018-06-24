@@ -2,29 +2,56 @@
 type Order {
   # 订单ID
   _id: ID!
+  # 订单号
+  order_no: ID!
+  # 用户ID
+  user_id: ID!
+  # 订单状态 1生成订单,2支付订单,3取消订单(客户触发),4作废订单(管理员触发),5完成订单,6退款(订单完成后),7部分退款(订单完成后)
+  status: Int!
+  # 订单类型 0普通订单,1团购订单,2限时抢购
+  type: Int!
   # 支付方式：0:微信支付 1:货到付款
   pay_type: Int!
   # 支付状态 0:未支付 1:已支付
   pay_status: Int!
-  # 订单状态 1生成订单,2支付订单,3取消订单(客户触发),4作废订单(管理员触发),5完成订单,6退款(订单完成后),7部分退款(订单完成后)
-  status: Int!
+  # 支付平台交易号
+  pay_trade_no: String!
+  # 配送状态 0：未发送,1：已发送,2：部分发送
+  express_status: Int!
+  # 收货人地址信息
+  delivery_address: OrderDeliveryAddress
+  # 应付商品总金额
+  payable_amount: Float!
+  # 实付商品总金额(会员折扣,促销规则折扣)
+  real_amount: Float!
   # 创建时间
-  created_time: Date
+  create_time: Date
   # 付款时间
   pay_time: Date
   # 发货时间
   send_time: Date
   # 完成时间
   finish_time: Date
+  # 确认收货时间
+  delivery_time: Date
+}
+
+# 订单收货地址
+type OrderDeliveryAddress {
+  consignee: String!
+  phone_number: String!
+  address: String!
 }
 
 input OrderInput {
+  # 订单类型 0普通订单,1团购订单,2限时抢购
+  type: Int!
   # 支付方式：0:微信支付 1:货到付款
-  pay_type: Int!
+  pay_type: Int
   # 支付状态 0:未支付 1:已支付
-  pay_status: Int!
+  pay_status: Int
   # 订单状态 1生成订单,2支付订单,3取消订单(客户触发),4作废订单(管理员触发),5完成订单,6退款(订单完成后),7部分退款(订单完成后)
-  status: Int!
+  status: Int
   # 创建时间
   created_time: Date
   # 付款时间

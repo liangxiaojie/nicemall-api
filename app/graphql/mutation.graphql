@@ -1,11 +1,11 @@
 # 增删改操作
 type Mutation {
   # 添加商品
-  createGoods(input: GoodsInput!): Goods @auth
+  createGoods(input: GoodsInput!): Goods @auth(require: SYS_ADMIN)
   # 更新商品信息
-  updateGoods(_id: ID!, input: GoodsInput!): Goods @auth
+  updateGoods(_id: ID!, input: GoodsInput!): Goods @auth(require: SYS_ADMIN)
   # 删除商品
-  deleteGoods(_id: ID!): Goods @auth
+  deleteGoods(_id: ID!): Goods @auth(require: SYS_ADMIN)
 
   # 购物车添加商品
   createCartGoods(input: CartGoodsInput!): CartGoods @auth
@@ -17,9 +17,9 @@ type Mutation {
   # 创建订单
   createOrder(input: OrderInput!): Order @auth
   # 更新订单
-  updateOrder(_id: ID!, input: OrderInput!): Order @auth
+  updateOrder(_id: ID!, input: OrderInput!): Order @auth(require: SYS_ADMIN)
   # 删除订单
-  deleteOrder(_id: ID!): Order @auth
+  deleteOrder(_id: ID!): Order @auth(require: SYS_ADMIN)
 
   # 添加收货地址
   createDeliveryAddress(input: DeliveryAddressInput!): DeliveryAddress @auth
@@ -29,9 +29,9 @@ type Mutation {
   deleteDeliveryAddress(_id: ID!): DeliveryAddress @auth
 
   # 添加轮播图
-  createGallery(input: GalleryInput!): Gallery @auth
+  createGallery(input: GalleryInput!): Gallery @auth(require: SYS_ADMIN)
   # 更新轮播图
-  updateGallery(_id: ID!, input: GalleryInput!): Gallery @auth
+  updateGallery(_id: ID!, input: GalleryInput!): Gallery @auth(require: SYS_ADMIN)
   # 删除轮播图
-  deleteGallery(_id: ID!): Gallery @auth
+  deleteGallery(_id: ID!): Gallery @auth(require: SYS_ADMIN)
 }
