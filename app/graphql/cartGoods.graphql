@@ -1,8 +1,6 @@
 # 购物车商品信息
 type CartGoods {
-  user_id: ID!
   goods: Goods!
-  goods_type: Int!
   number: Int!
   spec: [String]
   created_time: Date
@@ -10,9 +8,6 @@ type CartGoods {
 }
 
 input CartGoodsInput {
-  user_id: ID!
-  goods_id: ID!
-  goods_type: Int!
   number: Int!
   spec: [String]
 }
