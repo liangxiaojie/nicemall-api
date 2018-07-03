@@ -15,7 +15,7 @@ type Mutation {
   deleteCartGoods(_id: ID!): CartGoods @auth
 
   # 创建订单
-  createOrder(input: OrderInput!): Order @auth
+  createOrder(input: OrderInput!): PreOrder @auth
   # 更新订单
   updateOrder(_id: ID!, input: OrderInput!): Order @auth(require: SYS_ADMIN)
   # 删除订单

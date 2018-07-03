@@ -30,6 +30,20 @@ class OrderService extends Service {
   }
 
   async create({ delivery_address, cart_goodses }) {
+    function makeSign(body) {
+      let strSignTemp = '';
+      Object.keys(body).sort().map(i => {
+        if (!body[i]) return false;
+        strSignTemp += `${i}=${body[i]}&`;
+        return i;
+      });
+
+      strSignTemp += `key=${wxConfig.api_key}`;
+
+      return crypto.createHash('md5').update(strSignTemp).digest('hex')
+        .toUpperCase();
+    }
+
     const ip = this.ctx.request.ip.match(/\d+.\d+.\d+.\d+/);
 
     const body = {
@@ -47,20 +61,9 @@ class OrderService extends Service {
       trade_type: 'JSAPI',
     };
 
-    let strSignTemp = '';
-    Object.keys(body).sort().map(i => {
-      if (!body[i]) return false;
-      strSignTemp += `${i}=${body[i]}&`;
-      return i;
-    });
-
-    strSignTemp += `key=${wxConfig.api_key}`;
-
-    body.sign = crypto.createHash('md5').update(strSignTemp).digest('hex')
-      .toUpperCase();
+    body.sign = makeSign(body);
 
     const content = this.builder.buildObject(body);
-    console.log(content);
 
     const res = await this.ctx.curl('https://api.mch.weixin.qq.com/pay/unifiedorder', {
       method: 'POST',
@@ -68,15 +71,28 @@ class OrderService extends Service {
       dataType: 'text',
     });
 
-    const resData = new Promise((resolve, reject) => {
+    const resData = await new Promise((resolve, reject) => {
       this.parser.parseString(res.data, (err, result) => {
         if (err) reject(err);
         resolve(result.xml);
       });
     });
 
-    console.log(await resData);
-    
+    const prepay = {
+      appId: wxConfig.appid,
+      timeStamp: (Date.now() / 1000).toFixed(0),
+      nonceStr: Math.random().toString(36).substr(2, 32),
+    };
+
+    if (resData.return_msg === 'OK') {
+      prepay.package = `prepay_id=${resData.prepay_id}`;
+      prepay.paySign = makeSign(prepay);
+      prepay.signType = 'MD5';
+    }
+
+    return {
+      prepay,
+    };
 
     // const now = Date.now();
     // const data = await this.proxy.create({
