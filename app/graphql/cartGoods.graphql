@@ -8,6 +8,7 @@ type CartGoods {
 }
 
 input CartGoodsInput {
+  goods_id: ID!
   number: Int!
   spec: [String]
 }

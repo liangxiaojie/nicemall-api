@@ -7,6 +7,8 @@ const wxConfig = {
   appid: 'wx24b0ef466d9be3dd',
   secret: '76137c8f7249bfe54a1935adae67c5bf',
   token: 'asdhfsjsjkdfjkjjjkj',
+  mch_id: '1491189112',
+  api_key: '875436469c6c022f7dc01edcf69f6c2u',
 };
 
 module.exports = {

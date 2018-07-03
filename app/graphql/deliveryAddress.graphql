@@ -1,7 +1,6 @@
 # 收货地址
 type DeliveryAddress {
   _id: ID!
-  user_id: ID!
   consignee: String!
   phone_number: String!
   address: String!
