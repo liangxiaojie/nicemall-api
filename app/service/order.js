@@ -30,15 +30,8 @@ class OrderService extends Service {
   }
 
   async create({ delivery_address, cart_goodses }) {
-    const req = this.ctx.req;
-    const ip = req.headers['x-forwarded-for'] ||
-         req.connection.remoteAddress ||
-         req.socket.remoteAddress ||
-         req.connection.socket.remoteAddress;
-    console.log(req);
-    console.log(ip);
-    
-    
+    const ip = this.ctx.request.ip.match(/\d+.\d+.\d+.\d+/);
+
     const body = {
       appid: wxConfig.appid,
       mch_id: wxConfig.mch_id,
@@ -63,27 +56,28 @@ class OrderService extends Service {
 
     strSignTemp += `key=${wxConfig.api_key}`;
 
-    console.log(strSignTemp);
-
     body.sign = crypto.createHash('md5').update(strSignTemp).digest('hex')
       .toUpperCase();
 
-    console.log(body);
-    
     const content = this.builder.buildObject(body);
     console.log(content);
-    
+
     const res = await this.ctx.curl('https://api.mch.weixin.qq.com/pay/unifiedorder', {
       method: 'POST',
       content,
       dataType: 'text',
     });
-console.log(res);
 
-    this.parser.parseString(res.data, (err, result) => {
-      console.log(result);
+    const resData = new Promise((resolve, reject) => {
+      this.parser.parseString(res.data, (err, result) => {
+        if (err) reject(err);
+        resolve(result.xml);
+      });
     });
+
+    console.log(await resData);
     
+
     // const now = Date.now();
     // const data = await this.proxy.create({
     //   delivery_address, cart_goodses,
