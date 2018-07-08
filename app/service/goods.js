@@ -37,9 +37,9 @@ class GoodsService extends Service {
     return data.toJSON();
   }
 
-  async update(_id, { name, type, title, discription, imgSrc, store_nums, price, priceOld, sales }) {
+  async update(_id, { name, type, title, discription, imgSrc, images, store_nums, price, priceOld, sales }) {
     await this.proxy.update({ _id }, { $set: {
-      name, type, title, discription, imgSrc, store_nums, price, priceOld, sales,
+      name, type, title, discription, imgSrc, images, store_nums, price, priceOld, sales,
       updated_time: Date.now(),
     } });
     return await this.fetchById(_id);
