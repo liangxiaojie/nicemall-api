@@ -3,7 +3,7 @@
 exports.resolver = {
   Query: {
     deliveryAddresses(root, { query = {}, skip, first }, ctx) {
-      // query.user_id = ctx.user._id;
+      query.user_id = ctx.user._id;
       return ctx.service.deliveryAddress.fetch(query, first, skip);
     },
   },
