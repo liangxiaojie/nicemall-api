@@ -27,6 +27,7 @@ module.exports = app => {
     attrs: Array,
     spec_id: Schema.Types.ObjectId,
     logistics_id: Schema.Types.ObjectId,
+    detail: String,
     created_time: Date,
     updated_time: Date,
   });

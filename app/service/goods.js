@@ -28,18 +28,18 @@ class GoodsService extends Service {
     return data && data.toJSON();
   }
 
-  async create({ name, type, title, discription, imgSrc, store_nums, price, priceOld, sales }) {
+  async create({ name, type, title, discription, imgSrc, store_nums, price, priceOld, sales, detail }) {
     const now = Date.now();
     const data = await this.proxy.create({
-      name, type, title, discription, imgSrc, store_nums, price, priceOld, sales,
+      name, type, title, discription, imgSrc, store_nums, price, priceOld, sales, detail,
       created_time: now, updated_time: now,
     });
     return data.toJSON();
   }
 
-  async update(_id, { name, type, title, discription, imgSrc, images, store_nums, price, priceOld, sales }) {
+  async update(_id, { name, type, title, discription, imgSrc, images, store_nums, price, priceOld, sales, detail }) {
     await this.proxy.update({ _id }, { $set: {
-      name, type, title, discription, imgSrc, images, store_nums, price, priceOld, sales,
+      name, type, title, discription, imgSrc, images, store_nums, price, priceOld, sales, detail,
       updated_time: Date.now(),
     } });
     return await this.fetchById(_id);

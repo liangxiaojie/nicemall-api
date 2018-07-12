@@ -32,7 +32,7 @@ type Goods {
   # 商品属性
   attrs: [String]
   # 商品详情
-  details: String,
+  detail: String,
   # 创建时间
   created_time: Date
   # 修改时间
@@ -69,4 +69,6 @@ input GoodsInput {
   sales: Int!
   # 评分
   mark: Float!
+  # 商品详情
+  detail: String
 }

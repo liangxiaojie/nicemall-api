@@ -58,14 +58,14 @@ module.exports = appInfo => {
   ];
 
   config.multipart = {
-    fileSize: '50mb',
+    fileSize: '10mb',
   };
 
   config.bodyParser = {
     enable: true,
     encoding: 'utf8',
-    formLimit: '100kb',
-    jsonLimit: '100kb',
+    formLimit: '10mb',
+    jsonLimit: '10mb',
     strict: true,
     // @see https://github.com/hapijs/qs/blob/master/lib/parse.js#L8 for more options
     queryString: {
