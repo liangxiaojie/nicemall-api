@@ -1,5 +1,6 @@
 # 购物车商品信息
 type CartGoods {
+  _id: ID!
   goods: Goods!
   number: Int!
   spec: [String]

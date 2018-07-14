@@ -6,7 +6,10 @@ module.exports = app => {
 
   const CartGoodsSchema = new Schema({
     user_id: Schema.Types.ObjectId,
-    goods_id: Schema.Types.ObjectId,
+    goods: {
+      type: Schema.Types.ObjectId,
+      ref: 'Goods',
+    },
     number: Number,
     spec: Array,
     created_time: Date,

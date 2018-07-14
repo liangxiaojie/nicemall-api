@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+exports.resolver = {
   Query: {
     cartGoodses(root, params, ctx) {
       return ctx.service.cartGoods.fetchByUserId(ctx.user._id);

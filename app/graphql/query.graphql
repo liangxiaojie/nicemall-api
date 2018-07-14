@@ -14,7 +14,7 @@ type Query {
   goods(_id: ID!): Goods
 
   # 根据用户ID查询用户购物车商品列表
-  cartGoodses: [CartGoods!]! @auth
+  cartGoodses: [CartGoods!] @auth
 
   # 订单列表
   orders(query: OrderInput, first: Int!, skip: Int): [Order!]! @auth
