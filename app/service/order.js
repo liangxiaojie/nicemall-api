@@ -97,8 +97,8 @@ class OrderService extends Service {
 
     if (resData.return_msg === 'OK') {
       prepay.package = `prepay_id=${resData.prepay_id}`;
-      prepay.paySign = makeSign(prepay);
       prepay.signType = 'MD5';
+      prepay.paySign = makeSign(prepay);
     }
 
     return {
