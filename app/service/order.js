@@ -9,6 +9,7 @@ class OrderService extends Service {
   constructor(ctx) {
     super(ctx);
     this.proxy = this.ctx.app.model.Order;
+    this.goodsProxy = this.ctx.app.model.Goods;
     this.builder = new xml2js.Builder({
       headless: true,
       rootName: 'xml',
@@ -30,6 +31,15 @@ class OrderService extends Service {
   }
 
   async create({ delivery_address, cart_goodses }) {
+    const goodses = await this.goodsProxy.find({ _id: { $in: cart_goodses.map(d => d.goods_id) } });
+    cart_goodses.map(i => { // eslint-disable-line
+      i.goods = goodses.find(i1 => i1._id == i.goods_id); // eslint-disable-line
+    });
+    let total_fee = 0;
+    cart_goodses.map(i => { // eslint-disable-line
+      total_fee += i.goods.price * i.number;
+    });
+
     function makeSign(body) {
       let strSignTemp = '';
       Object.keys(body).sort().map(i => {
@@ -57,7 +67,7 @@ class OrderService extends Service {
       openid: this.ctx.user.openid,
       out_trade_no: 'test',
       spbill_create_ip: ip,
-      total_fee: 1,
+      total_fee,
       trade_type: 'JSAPI',
     };
 
