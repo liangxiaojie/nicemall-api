@@ -39,6 +39,7 @@ class OrderService extends Service {
     cart_goodses.map(i => { // eslint-disable-line
       total_fee += i.goods.price * i.number;
     });
+    total_fee *= 100;
 
     function makeSign(body) {
       let strSignTemp = '';
@@ -65,7 +66,7 @@ class OrderService extends Service {
       nonce_str: Math.random().toString(36).substr(2, 32),
       notify_url: 'test',
       openid: this.ctx.user.openid,
-      out_trade_no: 'test',
+      out_trade_no: Math.random().toString(36).substr(2, 32),
       spbill_create_ip: ip,
       total_fee,
       trade_type: 'JSAPI',
