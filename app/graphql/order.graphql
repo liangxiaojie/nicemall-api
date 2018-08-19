@@ -69,3 +69,7 @@ input OrderInput {
   # 购物车商品信息
   cart_goodses: [CartGoodsInput!]!
 }
+
+input OrderSearch {
+  type: Int
+}
